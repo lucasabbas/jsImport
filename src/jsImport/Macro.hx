@@ -47,7 +47,7 @@ class Macro {
           default:
         }
 
-      var tmp = Compiler.getOutput().directory() + '/tmp${Std.random(1 << 29)}.js';
+      var tmp = './tmp${Std.random(1 << 29)}.js';
       tmp.saveContent(lines.join('\n'));
       Compiler.includeFile(tmp);
       onAfterGenerate(tmp.deleteFile);
