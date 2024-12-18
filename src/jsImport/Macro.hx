@@ -30,7 +30,7 @@ class Macro {
             cl.meta.remove(':native');
             cl.meta.add(':native', [macro $v{id}], (macro null).pos);
 
-            switch meta {
+            var native = switch meta {
               case [{ params: [macro @star $v{(v:String)}] }]:
                 lines.push('import * as $id from "$v";');
               case [{ params: [macro @default $v{(v:String)}] }]:
@@ -47,7 +47,7 @@ class Macro {
           default:
         }
 
-      var tmp = Compiler.getOutput().directory() + '/tmp${Std.random(1 << 29)}.js';
+      var tmp = './tmp${Std.random(1 << 29)}.js';
       tmp.saveContent(lines.join('\n'));
       Compiler.includeFile(tmp);
       onAfterGenerate(tmp.deleteFile);
